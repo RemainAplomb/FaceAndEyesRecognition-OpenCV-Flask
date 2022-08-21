@@ -1,3 +1,4 @@
+# import the opencv package
 import cv2
 
 # Use the xml files from haarcascade to help in detecting the faces and eyes
@@ -22,12 +23,21 @@ while True:
     countEyes = len( detectedEyes) 
     loopIteration = 0
     while True:
+        # If there are still faces left that has not been drawn a rectangle,
+        # execute the code inside this condition
         if loopIteration < countFaces:
             (x, y, w, h) = detectedFaces[loopIteration]
             cv2.rectangle( videoFrame, (x, y), (x+w, y+h), ( 0, 255, 0 ), 2)
+        
+        # If there are still faces left that has not been drawn a rectangle,
+        # execute the code inside this condition
         if loopIteration < countEyes:
             (x, y, w, h) = detectedEyes[loopIteration]
             cv2.rectangle( videoFrame,(x,y),(x+w,y+h),(255, 0, 0),2)
+        
+        # increment the loop iteration and check if all 
+        # of the detected eyes and faces has been drawn a
+        # rectangle
         loopIteration += 1
         if loopIteration > countFaces and loopIteration > countEyes:
             break
@@ -38,6 +48,7 @@ while True:
     #    cv2.rectangle( videoFrame, (x, y), (x+w, y+h), ( 0, 255, 0 ), 2)
     #for (x,y,w,h) in detectedEyes:
     #    cv2.rectangle( videoFrame,(x,y),(x+w,y+h),(255, 0, 0),2)
+    
     # Output the result
     cv2.imshow( "Face and Eyes Recognition", videoFrame )
 
