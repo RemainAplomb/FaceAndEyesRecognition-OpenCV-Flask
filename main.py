@@ -5,20 +5,21 @@ import cv2
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 eyesCascade = cv2.CascadeClassifier("haarcascade_eye.xml")
 
-# Open the device's webcame to capture vide
+# Open the device's webcam to capture video
 captureWebcam = cv2.VideoCapture(0)
 
 while True:
-    # take the video's frame
+    # Take the video's frame
     _, videoFrame = captureWebcam.read()
-    # to detect the faces and eyes, the image must be transformed into grayscale
+    
+    # To detect the faces and eyes, the image must be transformed into grayscale
     transformToGrayscale = cv2.cvtColor( videoFrame, cv2.COLOR_BGR2GRAY )
 
-    # detect the faces and eyes using the scalefactor 1.1/1.2 and minNeighbors 4
+    # Detect the faces and eyes using the scalefactor 1.1/1.2 and minNeighbors 4
     detectedFaces = faceCascade.detectMultiScale( transformToGrayscale, 1.1, 4)
     detectedEyes = eyesCascade.detectMultiScale(transformToGrayscale, 1.1, 4)
 
-    # use the coordinates to draw a rectangle on the detected faces and eyes
+    # Use the coordinates to draw a rectangle on the detected faces and eyes
     countFaces = len( detectedFaces) 
     countEyes = len( detectedEyes) 
     loopIteration = 0
