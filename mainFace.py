@@ -30,12 +30,21 @@ class webcamVideo():
         self.countEyes = len( self.detectedEyes) 
         self.loopIteration = 0
         while True:
+            # If there are still faces left that has not been drawn a rectangle,
+            # execute the code inside this condition
             if self.loopIteration < self.countFaces:
                 (x, y, w, h) = self.detectedFaces[self.loopIteration]
                 cv2.rectangle( self.videoFrame, (x, y), (x+w, y+h), ( 0, 255, 0 ), 2)
+            
+            # If there are still faces left that has not been drawn a rectangle,
+            # execute the code inside this condition
             if self.loopIteration < self.countEyes:
                 (x, y, w, h) = self.detectedEyes[self.loopIteration]
                 cv2.rectangle( self.videoFrame,(x,y),(x+w,y+h),(255, 0, 0),2)
+            
+            # increment the loop iteration and check if all 
+            # of the detected eyes and faces has been drawn a
+            # rectangle
             self.loopIteration += 1
             if self.loopIteration > self.countFaces and self.loopIteration > self.countEyes:
                 break
@@ -47,6 +56,8 @@ class webcamVideo():
         #for (x,y,w,h) in self.detectedEyes:
         #    cv2.rectangle( self.videoFrame,(x,y),(x+w,y+h),(255, 0, 0),2)
         
-
+        # convert the videoFrame into a jpg image and
+        # convert the outputFrame to bytes so that the website
+        # will be able to display it
         _, outputFrame = cv2.imencode( ".jpg", self.videoFrame )
         return outputFrame.tobytes()
